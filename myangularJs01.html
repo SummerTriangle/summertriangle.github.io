@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<script src="angular.1.1.5.min.js"></script>
+</head>
+<body>
+
+<div >
+	 <p>My first expression: {{5+5}} </p>
+</div>
+<div>
+ 	<p>Name: <input type="text" ng-model="name"></p>
+ 	<p ng-bind="name"></p>
+</div>
+
+<div ng-init="quantity=1;cost=5">
+ <p> Total in dollar :{{ quantity*cost }}</p>
+</div>
+
+<div ng-init="quantity=1;cost=5">
+<p>Total in dollar :<span ng-bind="quantity*cost"></span></p>
+</div>
+
+<div ng-init="firstName='han';lastName='feng'">
+ <p> The name is {{firstName +" " +lastName}}</p>
+</div>
+
+<div ng-init="person={firstName:'han',lastName:'feng'}">
+<p>The lastName is {{person.lastName}} 大小写敏感 person.lastname 为空</p>
+</div>
+
+<div ng-init="points=[1,15,19,2,40]">
+<p> The point are {{points[2]}}</p>
+</div>
+
+<div ng-init="quantity=1;price=5">
+Quantity: <input type="number" ng-model="quantity">
+Costs:    <input type="number" ng-model="price">
+Total in dollar :{{ quantity * price}}
+</div>
+
+<div ng-init="names=['Tom','Jack','Red']">
+	The ng-repeat directive repeats an HTML element
+  <ul>
+      <li ng-repeat="x in names">
+            {{x}}
+      </li>
+  </ul>
+</div>
+
+<div ng-controller="personController">
+First Name :<input type="text" ng-model="person.firstName">
+Last  Name :<input type="text" ng-model="person.lastName">
+<br>
+Full Name :{{person.firstName + " " + person.lastName}}
+<br>
+function fullName : {{fullName()}}
+</div>
+
+
+<div ng-controller="nameController">
+ <ul>
+      <li ng-repeat="x in names">
+          {{x.name+ " "+x.country }}
+      </li>
+ </ul>
+</div>
+<script type="text/javascript">
+function personController($scope)
+{
+	$scope.person = {
+		firstName:"summer",
+		lastName:"triangle"
+	};
+	$scope.fullName= function (){
+		var x;
+		x = $scope.person;
+		return x.firstName + " " + x.lastName;
+	}
+}
+
+function nameController($scope){
+         $scope.names=[
+         {name:'Tom',country:'中国'},
+         {name:'Jack',country:'美国'},
+         {name:'Red',country:'日本'}
+         ];
+}
+
+</script>
+</body>
+</html>

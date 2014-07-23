@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="angular.1.1.5.min.js"></script>
+</head>
+<body>
+
+	<div ng-controller="personController">
+        <p> The name is {{person.lastName|uppercase}}</p>
+	 </div>
+
+     <div ng-controller="personController">
+         <p>The name is {{person.lastName|lowercase}}</p>
+     </div>
+
+
+     <div ng-controller="costController">
+       <input type="number" ng-model="quantity">
+       <input type="number" ng-model="price">
+       <p>Total ={{quantity*price|currency}}</p>
+     </div>
+
+     <div ng-controller="namesController">
+           <ul>
+                <li ng-repeat="x in names | orderBy:'country'">
+                    {{ x.name +','+x.country}}
+                </li>
+           </ul>
+     </div>
+
+    <div ng-controller="namesController">
+         <p><input type="text" ng-model='name'></p>
+         <ul>
+               <li ng-repeat="x in names| filter:name|orderBy:'country'">
+                 {{ (x.name|uppercase)+','+x.country}}
+               </li>
+         </ul>
+
+    </div>
+
+    <div ng-init="mySwitch=true">
+    <p>
+          <button ng-disable='mySwitch'>Click Me!</button>
+    </p>
+    <p>
+          <input type="checkbox" ng-model="mySwitch">Button
+    </p>
+    </div>
+
+    <div>
+        <p ng-show="true">I am visible.</p>
+        <p ng-show="false">I am not visible.</p>
+    </div>
+
+    <div ng-controller="myController">
+         <button ng-click="count=count+1">
+           Click me!
+         </button>
+           <p>{{count}}</p>
+    </div>
+
+    <div ng-controller="personController">
+               <button ng-click="toggle()">Toggle</button>
+               <p ng-show="myVar">
+                First Name :<input type="text" ng-model="person.firstName">
+                <br>
+                Last Name :<input type="text" ng-model="person.lastName">
+                <br>
+                Full Name:{{person.firstName+" "+person.lastName}}
+               </p>
+    </div>
+     
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+       {{firstName +" "+lastName}}
+    </div>
+	<script type="text/javascript">
+
+	  var app = angular.module("myApp",[]);
+       app.controller("myCtrl",function($scope){
+       	$scope.firstName="John";
+       	$scope.lastName="Smith";
+       });
+
+       function personController($scope)
+       {
+       	 $scope.person={
+         lastName:'triangle',
+          firstName:'summer'
+       	 };
+       	 $scope.myVar=true;
+       	 $scope.toggle = function(){
+             $scope.myVar = !$scope.myVar;
+       	 };
+
+       }
+       
+       function costController($scope){
+          $scope.quantity=1;
+          $scope.price = 9.9;
+       }
+
+       function namesController($scope)
+       {
+       	  $scope.names=[
+       	  {name:'Tom',country:'China'},
+       	  {name:'Jack',country:'American'},
+       	  {name:'Red',country:'Japan'}
+       	  ];
+       }
+
+       function myController($scope)
+       {
+              $scope.count = 0;
+       }
+
+     
+	</script>
+</body>
+</html>
